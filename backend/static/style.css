@@ -1,0 +1,79 @@
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    background: linear-gradient(to bottom, #eaf6ff, #ffffff);
+    margin: 0;
+    display: flex; /* Flexbox dla wyśrodkowania */
+    justify-content: center; /* Wyśrodkowanie poziome */
+    align-items: center; /* Wyśrodkowanie pionowe */
+    flex-direction: column; /* Ułożenie elementów w kolumnie */
+    min-height: 100vh; /* Minimalna wysokość okna */
+    text-align: center; /* Wyśrodkowanie tekstu */
+}
+
+/* Kontener na całą zawartość */
+.container {
+    max-width: 700px; /* Zmniejszenie szerokości kontenera */
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+
+/* Styl boksów z danymi (Temperatura, Ciśnienie, Wilgotność) */
+h1 {
+    font-size: 36px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.data-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin: 10px 0;
+    background: #f9fbfd;
+    border: 1px solid #d3e2f4;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* Styl tekstu w boksach */
+.data-box span {
+    font-weight: bold;
+    font-size: 24px; /* Większy tekst */
+}
+
+/* Styl ikon w boksach */
+.data-box i {
+    font-size: 36px;
+    margin-right: 10px;
+    color: #007bff;
+}
+
+.chart-container {
+    width: 100%; /* Szerokość kontenera */
+    max-width: 900px; /* Maksymalna szerokość kontenera */
+    margin: 20px auto; /* Wyśrodkowanie kontenera na stronie */
+    padding: 20px;
+    background: #f9fbfd;
+    border: 1px solid #d3e2f4;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Styl wykresu */
+canvas {
+    display: block;
+    width: 100%; /* Wypełnia całą szerokość kontenera */
+    max-width: 600px; /* Ograniczenie maksymalnej szerokości wykresu */
+    height: 300px; /* Ustalona wysokość wykresu */
+    margin: 0 auto; /* Wyśrodkowanie wykresu */
+}
+

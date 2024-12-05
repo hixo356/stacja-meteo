@@ -5,9 +5,9 @@ import paho.mqtt.client as mqtt
 from .models import WeatherData
 
 
-MQTT_BROKER = 'localhost'
+MQTT_BROKER = 'broker.emqx.io'
 MQTT_PORT = 1883
-MQTT_TOPIC = 'esp32/weather'
+MQTT_TOPIC = 'esp32-test'
 def on_connect(client, userdata, flags, rc):
     print("Connected " if rc == 0 else f"Conecting error: {rc}")
     client.subscribe(MQTT_TOPIC)

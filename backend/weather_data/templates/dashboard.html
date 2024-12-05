@@ -1,25 +1,81 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Dashboard</title>
+    <title>Stacja Meteo</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Weather Dashboard</h1>
-    <h2>Current Data</h2>
-    <p>Temperature: {{ latest_data.temperature }} °C</p>
-    <p>Pressure: {{ latest_data.pressure }} hPa</p>
-    <p>Humidity: {{ latest_data.humidity }} %</p>
+    <div class="container">
+        <h1>Stacja Meteo</h1>
+        <div class="data-box">
+            <i class="fas fa-thermometer-half"></i>
+            <span>Temperatura:</span>
+            <span>{{ latest_data.temperature }}°C</span>
+        </div>
+        <div class="data-box">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Ciśnienie:</span>
+            <span>{{ latest_data.pressure }} hPa</span>
+        </div>
+        <div class="data-box">
+            <i class="fas fa-tint"></i>
+            <span>Wilgotność:</span>
+            <span>{{ latest_data.humidity }}%</span>
+        </div>
+    </div>
 
-    <h2>Temperature Chart</h2>
-    <canvas id="temperatureChart"></canvas>
+    <div class="chart-container">
+        <h2>Wykres temperatury</h2>
+        <canvas id="temperatureChart"></canvas>
+    </div>
 
     <script>
-        setInterval(() => {
+        const temperatures = {{ temperatures|safe }};
+        const timestamps = {{ timestamps|safe }};
+
+        const ctx = document.getElementById('temperatureChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: timestamps,
+                datasets: [{
+                    label: 'Temperatura (°C)',
+                    data: temperatures,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                aspectRatio: 2,// Umożliwia elastyczne dopasowanie rozmiaru
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Czas'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Temperatura (°C)'
+                        },
+                        suggestedMin: Math.min(...temperatures) - 2,
+                        suggestedMax: Math.max(...temperatures) + 2
+                    }
+                }
+            }
+        })
+        setInterval(function() {
             window.location.reload();
-        }, 5000); // Odśwież co 5 sekund
+        }, 5000);
     </script>
 </body>
 </html>
