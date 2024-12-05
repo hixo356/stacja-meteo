@@ -50,8 +50,8 @@
 * No license is granted by implication or otherwise under any patent or
 * patent rights of the copyright holder.
 **************************************************************************/
-
 #include "bme280.h"
+
 static struct bme280_t *p_bme280; /**< pointer to BME280 */
 
 /*!
