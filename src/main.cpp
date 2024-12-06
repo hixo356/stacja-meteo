@@ -35,11 +35,8 @@
 #define SDA_PIN GPIO_NUM_17
 #define SCL_PIN GPIO_NUM_18
 
-// #define I2C_MASTER_ACK 0
-// #define I2C_MASTER_NACK 1
-
-#define WIFI_SSID "Mi Note 10 Litee"
-#define WIFI_PASSWORD "12345678" //eok7khz4y-92f8exz
+#define WIFI_SSID "siec"
+#define WIFI_PASSWORD "123"
 
 #define MQTT_BROKER_IP
 #define MQTT_BROKER_PORT 
@@ -173,25 +170,14 @@ void Publisher_Task(void *params)
                 &v_uncomp_pressure_s32, &v_uncomp_temperature_s32, &v_uncomp_humidity_s32);
 
             double temp = bme280_compensate_temperature_double(v_uncomp_temperature_s32);
-            // char temperature[12];
-            // sprintf(temperature, "%.2f", temp);
 
             double press = bme280_compensate_pressure_double(v_uncomp_pressure_s32) / 100; // Pa -> hPa
-            // char pressure[10];
-            // sprintf(pressure, "%.2f", press);
 
             double hum = bme280_compensate_humidity_double(v_uncomp_humidity_s32);
-            // char humidity[10];
-            // sprintf(humidity, "%.2f", hum);
 
             // Print BME data
             if (com_rslt == SUCCESS)
             {
-                // printf("--------------------------------\n");
-                // printf("Temperature %s\n",temperature);
-                // printf("Pressure %s\n",pressure);
-                // printf("Humidity %s\n",humidity);
-
 				char json[64];
 				sprintf(json, "{\"temperature\": %.2f, \"pressure\": %.2f, \"humidity\": %.2f}", temp, press, hum);
 				esp_mqtt_client_publish(mqtt->client, "esp32-test", json, 0, 0, 0);
@@ -211,8 +197,6 @@ void Publisher_Task(void *params)
 
 extern "C" void app_main() {
 
-    printf("XD\n\n");
-
 	static Wifi wifi(WIFI_SSID, WIFI_PASSWORD);
 
 	vTaskDelay(pdMS_TO_TICKS(15000));
@@ -221,8 +205,6 @@ extern "C" void app_main() {
 
     // Initialize I2C parameters
 	i2c_master_init();
-
-	printf("XDXD\n\n");
 
 	vTaskDelay(pdMS_TO_TICKS(10000));
 

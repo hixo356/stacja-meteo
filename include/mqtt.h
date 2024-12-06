@@ -14,7 +14,7 @@
 
 class Mqtt{
     public:
-        Mqtt(Wifi *wifi); //const char *broker_ip, const char *broker_port
+        Mqtt(Wifi *wifi);
         ~Mqtt();
         static void mqtt_event_handler(void *arg, esp_event_base_t event_base, int32_t event_id, void *event_data);
         esp_mqtt5_client_handle_t client;
